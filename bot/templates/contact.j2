@@ -1,0 +1,7 @@
+💼 {{ counteragent['name'] }} (ИНН {{ counteragent['inn'] }})<br>
+<br>
+Менеджер {{ counteragent['info']['managerName'] }}<br>
+📞 {{ counteragent['info']['managerPhone'] }}<br>
+📨 {{ counteragent['info']['managerEmail'] }}<br>
+<br>
+Баланс контрагента на {{ counteragent['balance']['closing']['date']| short_date("%Y-%m-%d %H:%M:%S") }} - {{ counteragent['balance']['closing']['sum'] }} руб.<br>

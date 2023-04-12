@@ -1,0 +1,36 @@
+📄 {{ order['orderId'] }}<br>
+
+{% if order['state'] == 'finished' %}
+  🟢  {{ order['stateName'] }} {{ order['stateDate']| short_date("%Y-%m-%d") }}<br>
+{% else %}
+  {% if order['orderDates']['derivalFromOspSender'] %}⚪ {{ order['stateName'] }} {{ order['orderDates']['derivalFromOspSender']|short_date }}.<br>{% endif %}
+  {% if order['orderDates']['arrivalToReceiver'] %}⚪ Расчетная дата доставки: {{ order['orderDates']['arrivalToReceiver']|short_date }}.<br>{% endif %}
+{% endif %}
+
+📦 {% if order['freight']['name'] %}{{ order['freight']['name'] }}. {% endif %}{{ order['freight']['weight'] }} кг, мест - {{ order['freight']['places'] }}.<br>
+<br>
+
+{% if order['isAir'] %} 
+  ✈️ Доставка авиа. <br>
+{% else %} 
+  🚚 Доставка наземным транспортом.<br>
+{% endif %}
+<br>
+🛫 {{ order['sender']['name'] }}({{ order['derival']['address'] }})<br>
+🛬 {{ order['receiver']['name'] }}({{ order['arrival']['address'] }})<br>
+<br>
+{% if order['orderDates']['arrivalToOspReceiver'] %}🏷 Дата прибытия груза на терминал-получатель {{ order['orderDates']['arrivalToOspReceiver']| short_date("%Y-%m-%d")  }}<br>{% endif %}
+{% if order['orderDates']['arrivalToOspSender'] %}🏷 Дата прибытия груза на терминал-отправитель {{ order['orderDates']['arrivalToOspSender']| short_date("%Y-%m-%d")  }}<br>{% endif %}
+{% if order['state'] == 'finished' %}
+  {% if order['orderDates']['arrivalToReceiver'] %}
+    🏷 Фактическая дата доставки: {{ order['orderDates']['arrivalToReceiver']|short_date }}<br>
+  {% else %}
+    🏷 Расчетная дата доставки: {{ order['orderDates']['arrivalToReceiver']|short_date }}<br>
+  {% endif %}
+{% endif %}
+{% if order['orderDates']['giveoutFromOspReceiver'] %}🏷 Ориентировочная дата готовности груза к выдаче на терминале-получателе {{ order['orderDates']['giveoutFromOspReceiver']| short_date("%Y-%m-%d %H:%M:%S") }}<br>{% endif %}
+{% if order['orderDates']['finish'] %}🏷 Дата исполнения заказа {{ order['orderDates']['finish']| short_date("%Y-%m-%d %H:%M:%S") }}<br>{% endif %}
+
+<br>
+🧾 {{ order['totalSum'] }} руб. (плательщик {{ order['payer']['name'] }},
+{% if order['isPaid'] %}оплачено{% else %}не оплачено{% endif %})<br>

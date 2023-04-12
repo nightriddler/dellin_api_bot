@@ -1,0 +1,4 @@
+{% for order in orders %}
+  {% include 'includes/short_order.j2' %}
+  {% if not loop.last %}<br><br>{% endif %}
+{% endfor %}
