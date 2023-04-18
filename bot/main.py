@@ -21,7 +21,10 @@ async def main():
         ),
         handlers=[
             RotatingFileHandler(
-                f"{BASE_DIR}/output.log", maxBytes=50000000, backupCount=10
+                f"{BASE_DIR}/output.log",
+                maxBytes=50000000,
+                backupCount=10,
+                encoding="utf-8",
             ),
             logging.StreamHandler(sys.stdout),
         ],
