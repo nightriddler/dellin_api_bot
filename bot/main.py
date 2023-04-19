@@ -28,6 +28,7 @@ async def main():
             ),
             logging.StreamHandler(sys.stdout),
         ],
+        encoding="utf-8",
     )
 
     bot = Bot(token=BOT_TELEGRAM_TOKEN)
