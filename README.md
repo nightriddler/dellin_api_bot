@@ -30,7 +30,8 @@ APScheduler # обновление БД по расписанию
 | Информация о заказах | Даты изменения статусов |
 | <img src="image/order.png" alt="order" width="500"/> | <img src="image/status_history.png" alt="status_history" width="500"/> |
 
-# Деплой в docker-compose
+# Развертка в docker-compose
+
 1. Клонируем репозиторий 
 
 ```bash
@@ -41,7 +42,7 @@ git clone https://github.com/nightriddler/dellin_api_bot.git
 
 Вводим ключ, почту и пароль от сервиса Деловые Линии.
 
-Зарегистрировать API-ключ Деловых Линий [тут](https://dev.dellin.ru/registration/).
+>Зарегистрировать API-ключ Деловых Линий [тут](https://dev.dellin.ru/registration/).
 
 ```
 DELLIN_APPKEY=<ключ-от-сервиса>
