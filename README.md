@@ -24,24 +24,6 @@ APScheduler # обновление БД по расписанию
  
 | Стартовая | Информация о клиенте | 
 | :---: | :---: | 
-| <img src="image/start.png" alt="start" height="200"/> | <img src="image/counteragents.png" alt="counteragents" height="300"/> |
-| Информация о заказах | Даты изменения статусов |
-| <img src="image/order.png" alt="order" height="700"/> | <img src="image/status_history.png" alt="status_history" height="700"/> |
-
-| Навигация  |
-| :---:  | 
-| Старт  |
-| <img src="image/start.png" alt="start" width="500"/> | 
-| Информация о клиенте |
-| <img src="image/counteragents.png" alt="counteragents" width="500"/> |
-| Информация о заказах |
-| <img src="image/order.png" alt="order" width="500"/> |
-| Даты изменения статусов |
-| <img src="image/status_history.png" alt="status_history" width="500"/> |
-
-
-| Стартовая | Информация о клиенте | 
-| :---: | :---: | 
 | <img src="image/start.png" alt="start" width="500"/> | <img src="image/counteragents.png" alt="counteragents" width="500"/> |
 | Информация о заказах | Даты изменения статусов |
 | <img src="image/order.png" alt="order" width="500"/> | <img src="image/status_history.png" alt="status_history" width="500"/> |
