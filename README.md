@@ -40,6 +40,12 @@ APScheduler # обновление БД по расписанию
 | <img src="image/status_history.png" alt="status_history" width="500"/> |
 
 
+| Стартовая | Информация о клиенте | 
+| :---: | :---: | 
+| <img src="image/start.png" alt="start" width="500"/> | <img src="image/counteragents.png" alt="counteragents" width="500"/> |
+| Информация о заказах | Даты изменения статусов |
+| <img src="image/order.png" alt="order" width="500"/> | <img src="image/status_history.png" alt="status_history" width="500"/> |
+
 # Деплой в докере
 1. Клонируем репозиторий 
 
@@ -108,6 +114,7 @@ http://127.0.0.1:5050/
 
 ## Документация
 [Документация к АПИ Деловые Линии](https://dev.dellin.ru/api/).
+
 
 ## Связаться с автором
 >[Telegram](https://t.me/nightriddler)
