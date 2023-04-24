@@ -128,3 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 *.vscode/
+
+#custom crud
+bot/db/crud.py
+.DS_Store

@@ -1,4 +1,5 @@
 from contextlib import suppress
+from json import JSONDecodeError
 
 import api
 from aiogram import Router
@@ -103,9 +104,9 @@ async def index_orders(
 async def index_orders(callback: CallbackQuery, callback_data: OrdersCallbackData):
     """Кнопка получения информации об изменении дат в статусах заказа."""
     order = callback_data.order
-    response = api.dl.get_order_history(order)
 
     try:
+        response = api.dl.get_order_history(order)
         status_order = response.get("data").get("statusHistory").get(order)
         clear_status = clear_duplicate(status_order)
         prepare_answer = render_template(
@@ -113,5 +114,7 @@ async def index_orders(callback: CallbackQuery, callback_data: OrdersCallbackDat
         )
     except AttributeError:
         prepare_answer = "История перемещения отсутствует."
+    except JSONDecodeError:
+        prepare_answer = "Сервис временно недоступен."
 
     await callback.answer(text=prepare_answer, show_alert=True)

@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+
+  db:
+    container_name: postgresql_db
+    image: postgres:13.4
+    ports:
+      - 5432:5432
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - 5050:80
+    depends_on:
+      - db
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+
+  bot:
+    container_name: dellin_bot
+    build: ./bot
+    command: python main.py
+    volumes:
+      - ./bot:/code
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+
+volumes:
+  postgres_data: null
