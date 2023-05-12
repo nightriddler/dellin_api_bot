@@ -22,7 +22,7 @@ async def main():
         handlers=[
             RotatingFileHandler(
                 f"{BASE_DIR}/output.log",
-                maxBytes=50000000,
+                maxBytes=5000000,
                 backupCount=10,
                 encoding="utf-8",
             ),
