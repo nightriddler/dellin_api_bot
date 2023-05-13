@@ -10,12 +10,17 @@ from aiogram.types import CallbackQuery, Message
 from callback import OrdersCallbackData
 from contains import COUNT_ORDER_IN_PAGE
 from db.base import counteragents_crud, order_crud
-from keyboards import get_keyboadrs_start, get_keyboard_cancel, get_orders_keyboard
+from keyboards import (
+    get_keyboadrs_start,
+    get_keyboard_cancel,
+    get_orders_keyboard,
+    get_keyboard_cancel_from_status,
+)
 from magic_filter import F
 from middlewares import ChatIdPermissionMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
 from templates import render_template
-from utils import clear_duplicate, get_order_count_in_menu
+from utils import clear_duplicate_status, get_order_count_in_menu
 
 router = Router()
 router.callback_query.middleware(ChatIdPermissionMiddleware())
@@ -101,20 +106,23 @@ async def index_orders(
 
 
 @router.callback_query(OrdersCallbackData.filter(F.status == "single"))
-async def index_orders(callback: CallbackQuery, callback_data: OrdersCallbackData):
-    """Кнопка получения информации об изменении дат в статусах заказа."""
+async def status_history(callback: CallbackQuery, callback_data: OrdersCallbackData):
+    """Кнопка получения информации истории перемещения."""
     order = callback_data.order
+    index = callback_data.index
 
     try:
         response = api.dl.get_order_history(order)
         status_order = response.get("data").get("statusHistory").get(order)
-        clear_status = clear_duplicate(status_order)
+        clear_statuses = clear_duplicate_status(status_order)
         prepare_answer = render_template(
-            "order_history.j2", {"status_order": clear_status}
+            "order_history.j2", {"status_order": clear_statuses}
         )
     except AttributeError:
-        prepare_answer = "История перемещения отсутствует."
-    except JSONDecodeError:
-        prepare_answer = "Сервис временно недоступен."
-
-    await callback.answer(text=prepare_answer, show_alert=True)
+        await callback.answer(text="История перемещения отсутствует", show_alert=True)
+    await callback.message.edit_text(
+        prepare_answer,
+        reply_markup=get_keyboard_cancel_from_status(
+            current_orders_index=index,
+        ),
+    )

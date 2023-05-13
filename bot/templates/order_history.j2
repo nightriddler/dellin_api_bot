@@ -1,3 +1,19 @@
 {% for order in status_order %}
-  {{ order['stateDate']| short_date("%Y-%m-%dT%H:%M:%S.%f+03:00", endformat="%d.%m.%Y %H:%M")}}<br>{{ order['stateName'] }}<br><br>
+  {% if loop.first %} 
+    Заказ {{ order['number']}}
+    <br>
+    <br>
+  {% endif %}
+
+  {% if order['detailedStatusRus'] %}
+    🕒 {{ order['detailedStatusDate']| short_date("%Y-%m-%dT%H:%M:%S.%f+03:00", endformat="%d.%m.%Y %H:%M")}}
+    <br>
+    🚚 {{ order['detailedStatusRus'] }}
+  {% else %}
+    🕒 {{ order['stateDate']| short_date("%Y-%m-%dT%H:%M:%S.%f+03:00", endformat="%d.%m.%Y %H:%M")}}
+    <br>
+    🚚 {{ order['stateName'] }}
+  {% endif %}
+  <br>
+  <br>
 {% endfor %}

@@ -25,8 +25,10 @@ def get_orders_keyboard(
     if orders:
         for order in orders:
             builder.button(
-                text="Даты изменения статусов",
-                callback_data=OrdersCallbackData(status="single", order=order),
+                text="История перемещения",
+                callback_data=OrdersCallbackData(
+                    status="single", order=order, index=current_orders_index
+                ),
             )
 
     prev_index = current_orders_index - 1
@@ -52,5 +54,18 @@ def get_keyboard_cancel() -> InlineKeyboardMarkup:
     """Клавиатура возврата к меню."""
     builder = InlineKeyboardBuilder()
     builder.button(text="< Назад", callback_data="cancel")
+    builder.adjust(1)
+    return builder.as_markup(resize_keyboard=True)
+
+
+def get_keyboard_cancel_from_status(
+    current_orders_index: int,
+) -> InlineKeyboardMarkup:
+    """Клавиатура возврата к меню."""
+    builder = InlineKeyboardBuilder()
+    builder.button(
+        text="< Назад",
+        callback_data=OrdersCallbackData(status="page", index=current_orders_index),
+    )
     builder.adjust(1)
     return builder.as_markup(resize_keyboard=True)

@@ -9,14 +9,19 @@ def get_order_count_in_menu(all_counts, count_on_page):
     return skip
 
 
-def clear_duplicate(orders):
+def clear_duplicate_status(statuses):
     """
     Убирает повторяющиеся статусы в заказах.
     """
-    without_duplicate = []
-    check = set()
-    for status in orders:
-        if status.get("stateName") not in check:
-            without_duplicate.append(status)
-            check.add(status.get("stateName"))
-    return without_duplicate
+    without_duplicate_statuses = []
+    unique_status = set()
+    for status in statuses:
+        if status.get("detailedStatusRus"):
+            if status["detailedStatusRus"] not in unique_status:
+                without_duplicate_statuses.append(status)
+                unique_status.add(status["detailedStatusRus"])
+        else:
+            if status["stateName"] not in unique_status:
+                without_duplicate_statuses.append(status)
+                unique_status.add(status["stateName"])
+    return without_duplicate_statuses
