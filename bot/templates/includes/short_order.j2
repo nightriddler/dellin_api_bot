@@ -26,7 +26,9 @@
     🏷 Фактическая дата доставки: {{ order['orderDates']['arrivalToReceiver']|short_date }}<br>
   {% endif %}
   {% else %}
+  {% if order['orderDates']['arrivalToReceiver'] %}
     🏷 Расчетная дата доставки: {{ order['orderDates']['arrivalToReceiver']|short_date }}<br>
+  {% endif %}
 {% endif %}
 {% if order['orderDates']['giveoutFromOspReceiver'] %}🏷 Ориентировочная дата готовности груза к выдаче на терминале-получателе {{ order['orderDates']['giveoutFromOspReceiver']| short_date("%Y-%m-%d %H:%M:%S") }}<br>{% endif %}
 {% if order['orderDates']['finish'] %}🏷 Дата исполнения заказа {{ order['orderDates']['finish']| short_date("%Y-%m-%d %H:%M:%S") }}<br>{% endif %}
